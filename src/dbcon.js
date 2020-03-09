@@ -1,4 +1,4 @@
-const config = require("./db_config.json");
+const config = require("../db_config.json");
 
 //Connect to database
 var mysql = require('mysql');

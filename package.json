@@ -2,10 +2,10 @@
     "name": "great_vacations",
     "version": "1.0.0",
     "description": "",
-    "main": "app.js",
+    "main": "src/app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon -e handlebars app.js"
+        "start": "nodemon -e handlebars"
     },
     "repository": {
         "type": "",

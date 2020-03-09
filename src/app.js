@@ -1,5 +1,3 @@
-//Use express and handlebars
-//var PORT = process.env.PORT || 8009;
 var express = require('express');
 var mysql = require('./dbcon.js');
 var morgan = require('morgan');
@@ -23,7 +21,7 @@ app.get('/', function (req, res, next) {
 });
 
 //Page rendering
-app.use('/weather', require('./public/js/weather.js'));
+app.use('/weather', require('./weather.js'));
 
 //Not found error page rendering
 app.use(function (req, res) {

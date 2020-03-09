@@ -1,5 +1,5 @@
 //start the server with express
-module.exports = function() {
+module.exports = function () {
     var express = require('express');
     var router = express.Router();
 
@@ -8,8 +8,8 @@ module.exports = function() {
 
     //Get the weather table
     function getweather(mysql) {
-        return function(callback) {
-            mysql.pool.query("SELECT State, County, Year, Good_Days, Moderate_Days, Unhealthy_Days, Hazardous_Days, Max_AQI, Median_AQI, Days_CO, Days_Ozone, Days_SO2 FROM AirQualityAndParticles", function(err, tb1) {
+        return function (callback) {
+            mysql.pool.query("SELECT State, County, Year, Good_Days, Moderate_Days, Unhealthy_Days, Hazardous_Days, Max_AQI, Median_AQI, Days_CO, Days_Ozone, Days_SO2 FROM AirQualityAndParticles", function (err, tb1) {
                 if (err) {
                     return callback(err, []);
                 }
@@ -20,8 +20,13 @@ module.exports = function() {
     //Search trough the weather table based on given filters in handlebars
     function searchFunction(req, res, mysql, context, complete) {
         var query = "SELECT State, County, Year, Good_Days, Moderate_Days, Unhealthy_Days, Hazardous_Days, Max_AQI, Median_AQI, Days_CO, Days_Ozone, Days_SO2 FROM AirQualityAndParticles WHERE " + req.query.filter + " LIKE " + mysql.pool.escape(req.query.search + '%');
-        console.log(query)
-        mysql.pool.query(query, function(err, results) {
+        customQuery(req, res, mysql, context, query, complete);
+    };
+
+
+    function customQuery(req, res, mysql, context, query, complete) {
+        console.log(`Query: ${query}`);
+        mysql.pool.query(query, function (err, results) {
             if (err) {
                 res.write(JSON.stringify(err));
                 res.end();
@@ -29,17 +34,17 @@ module.exports = function() {
             context.weather = results;
             complete();
         });
-    };
+    }
 
     //Render the page with the loaded tables
-    router.get('/', function(req, res) {
+    router.get('/', function (req, res) {
 
         var mysql = req.app.get('mysql');
         async.parallel({
-                weather: getweather(mysql)
-            },
+            weather: getweather(mysql)
+        },
 
-            function(err, results) {
+            function (err, results) {
                 if (err) {
                     console.log(err.message);
                 }
@@ -49,7 +54,7 @@ module.exports = function() {
     });
 
     //Render the search results based on selected criteria
-    router.get('/search', function(req, res) {
+    router.get('/search', function (req, res) {
         var callbackCount = 0;
         var context = {};
         var mysql = req.app.get('mysql');
@@ -64,12 +69,12 @@ module.exports = function() {
     });
 
     //Update a row from weather table baed on id
-    router.post('/update', function(req, res) {
+    router.post('/update', function (req, res) {
         console.log(req.body)
         var mysql = req.app.get('mysql');
         var sql = "UPDATE weather SET priority = ?, member_name = ?, note = ? WHERE id = ?";
         var inserts = [req.body.editPriority, req.body.editMember, req.body.editNote, req.body.updateID];
-        sql = mysql.pool.query(sql, inserts, function(err, results) {
+        sql = mysql.pool.query(sql, inserts, function (err, results) {
             if (err) {
                 console.log(JSON.stringify(err))
                 res.write(JSON.stringify(err));
@@ -81,11 +86,11 @@ module.exports = function() {
     });
 
     //Delete an entry from the table based on client id
-    router.post('/delete', function(req, res) {
+    router.post('/delete', function (req, res) {
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM weather WHERE id = ?";
         var inserts = [req.body.deleteGID];
-        sql = mysql.pool.query(sql, inserts, function(err, results) {
+        sql = mysql.pool.query(sql, inserts, function (err, results) {
             if (err) {
                 console.log(err)
                 res.write(JSON.stringify(err));
