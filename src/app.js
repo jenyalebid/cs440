@@ -1,5 +1,3 @@
-//Use express and handlebars
-//var PORT = process.env.PORT || 8009;
 var express = require('express');
 var mysql = require('./dbcon.js');
 var morgan = require('morgan');
@@ -15,23 +13,24 @@ app.use('/', express.static('public'));
 app.set('mysql', mysql);
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', process.argv[2]);
+app.set('port', process.argv[2] || process.env.WEATHER_PORT || 3340);
 
 //Render the home page
-app.get('/', function(req, res, next) {
+app.get('/', function (req, res, next) {
     res.render('index');
 });
 
 //Page rendering
-app.use('/weather', require('./public/js/weather.js'));
+app.use('/weather', require('./weather.js'));
+app.use('/custom', require('./custom.js'));
 
 //Not found error page rendering
-app.use(function(req, res) {
+app.use(function (req, res) {
     res.status(404);
     res.render('404');
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.type('plain/text');
     res.status(500);
@@ -39,6 +38,6 @@ app.use(function(err, req, res, next) {
 });
 
 //listen on specified port
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function () {
     console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
