@@ -1,0 +1,64 @@
+<div class="container">
+
+	<!--search weather-->
+	<form action="/weather/search" method="get">
+
+		<div class="form-group col-md-7">
+			<input name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
+		</div>
+		<!--select what to filter the search results by-->
+		<div class="form-group col-md-3">
+			<select class="form-control" name="filter">
+				<option value="State">State</option>
+				<option value="County">County</option>
+			</select>
+		</div>
+		<div class="form-group col-md-2">
+			<button type="submit" class="btn btn-primary btn-block">Search Locations</button>
+		</div>
+
+	</form>
+
+	<!--display table-->
+	<div>
+		<table class='table'>
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>State</th>
+					<th>County</th>
+					<th>Year</th>
+					<th>Good Days</th>
+					<th>Moderate Days</th>
+					<th>Unhealthy Days</th>
+					<th>Hazardous Days</th>
+					<th>Max AQI</th>
+					<th>Median AQI</th>
+					<th>Days Ozone</th>
+					<th>Days SO2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--using handlebars to display each row from database-->
+				{{#each weather}}
+		
+				<tr>
+					<td>{{@index}}</td>
+					<td>{{State}}</td>
+					<td>{{County}}</td>
+					<td>{{Year}}</td>
+					<td>{{Good_Days}}</td>
+					<td>{{Moderate_Days}}</td>
+					<td>{{Unhealthy_Days}}</td>
+					<td>{{Hazardous_Days}}</td>
+					<td>{{Max_AQI}}</td>
+					<td>{{Median_AQI}}</td>
+					<td>{{Days_Ozone}}</td>
+					<td>{{Days_SO2}}</td>
+				</tr>
+				
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</div>

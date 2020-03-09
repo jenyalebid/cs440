@@ -1,0 +1,213 @@
+@charset "UTF-8";
+.container {
+    background-color: #FFFFFF;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom-width: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+}
+
+.home {
+    width: 80%;
+    padding: 50px;
+}
+
+.primary_header {
+    width: 100%;
+    background-color: #3276B1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    clear: left;
+}
+
+.search {
+    padding: 20px;
+    background-color: rgb(120, 187, 81);
+    font-weight: bold;
+}
+
+.search input[type=text] {
+    display: block;
+    padding: 6px;
+    width: 100%;
+    border: none;
+    font-size: 20px;
+}
+
+.searchButton {
+    display: block;
+    float: right;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+    font-size: 16px;
+}
+
+.filter {
+    margin-top: 15px;
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+    ;
+}
+
+table {
+    display: table;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+
+.buttonCont {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inTableButton {
+    float: right;
+}
+
+label {
+    padding-top: 15px;
+    line-height: 2;
+    font-size: small;
+}
+
+.title {
+    font-weight: bold;
+    font-style: normal;
+    font-family: "Franklin Gothic Bold", "Arial Black", "sans-serif";
+    text-align: left;
+    color: #FFFFFF;
+    padding: 10px;
+    letter-spacing: 2px;
+}
+
+.copyright {
+    text-align: center;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    border-top-width: 2px;
+    font-family: "Source Sans Pro";
+}
+
+.bottom {
+    padding: 50px;
+    background-color: #717070;
+    position: absolute;
+    bottom: 0px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.xButton {
+    margin-top: -5px;
+}
+
+
+/* The navigation menu */
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+
+
+/* Navigation links */
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+/* The subnavigation menu */
+
+.subnav {
+    float: left;
+    overflow: hidden;
+}
+
+
+/* Subnav button */
+
+.subnav .subnavbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+
+/* Add a red background color to navigation links on hover */
+
+.navbar a:hover,
+.subnav:hover .subnavbtn {
+    background-color: rgb(61, 61, 61);
+}
+
+
+/* Style the subnav content - positioned absolute */
+
+.subnav-content {
+    display: none;
+    position: absolute;
+    left: 5%;
+    background-color: rgb(61, 61, 61);
+    z-index: 1;
+}
+
+
+/* Style the subnav links */
+
+.subnav-content a {
+    float: left;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Add a grey background color on hover */
+
+.subnav-content a:hover {
+    background-color: #eee;
+    color: black;
+}
+
+
+/* When you move the mouse over the subnav container, open the subnav content */
+
+.subnav:hover .subnav-content {
+    display: block;
+}
