@@ -6,6 +6,7 @@ module.exports = function () {
     //Allow for multiple functions
     var async = require('async');
 
+
     //Get the weather table
     function getweather(mysql) {
         return function (callback) {
@@ -17,6 +18,7 @@ module.exports = function () {
             });
         }
     }
+
     //Search trough the weather table based on given filters in handlebars
     function searchFunction(req, res, mysql, context, complete) {
         var query = "SELECT State, County, Year, Good_Days, Moderate_Days, Unhealthy_Days, Hazardous_Days, Max_AQI, Median_AQI, Days_CO, Days_Ozone, Days_SO2 FROM AirQualityAndParticles WHERE " + req.query.filter + " LIKE " + mysql.pool.escape(req.query.search + '%');
@@ -30,7 +32,13 @@ module.exports = function () {
                 res.write(JSON.stringify(err));
                 res.end();
             }
-            context.weather = results;
+            context.queryResult = results;
+            console.log(results);
+            context.columns = [];
+            for (let column in results[0]) {
+                context.columns.push(column)
+                console.log(`Column: ${column}`);
+            };
             complete();
         });
     }
@@ -39,26 +47,26 @@ module.exports = function () {
     router.get('/', function (req, res) {
         var mysql = req.app.get('mysql');
         async.parallel({
-            weather: getweather(mysql)
+            custom: getweather(mysql)
         }, function (err, results) {
             if (err) {
                 console.log(err.message);
             }
-            res.render('weather', results);
+            res.render('custom', results);
         });
     });
 
     //Render the search results based on selected criteria
-    router.get('/search', function (req, res) {
+    router.get('/customQuery', function (req, res) {
         var callbackCount = 0;
         var context = {};
         var mysql = req.app.get('mysql');
-        searchFunction(req, res, mysql, context, complete);
+        customQuery(req, res, mysql, context, req.query.query, complete);
 
         function complete() {
             callbackCount++;
             if (callbackCount >= 1) {
-                res.render('weather', context);
+                res.render('custom', context);
             };
         };
     });
@@ -75,7 +83,7 @@ module.exports = function () {
                 res.write(JSON.stringify(err));
                 res.end();
             } else {
-                res.redirect('/weather');
+                res.redirect('/custom');
             }
         });
     });
@@ -92,7 +100,7 @@ module.exports = function () {
                 res.status(400);
                 res.end();
             } else {
-                res.redirect('/weather');
+                res.redirect('/custom');
             }
         });
     });

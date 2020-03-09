@@ -1,0 +1,43 @@
+<div class="container">
+
+    <form action="/custom/customQuery" method="get">
+
+        <div class="form-group col-md-7">
+            <input name="query" class="form-control" type="text" placeholder="Query" aria-label="Query">
+        </div>
+
+        <div class="form-group col-md-2">
+            <button type="submit" class="btn btn-primary btn-block">Run</button>
+        </div>
+
+    </form>
+
+    <!--display table-->
+    <div>
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    {{#each columns}}
+                    <td>{{this}}</td>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                <!--using handlebars to display each row from database-->
+                {{#each queryResult}}
+
+                <tr>
+                    <td>{{@index}}</td>
+                    {{#each this}}
+                    <td>
+                        {{this}}
+                    </td>
+                    {{/each}}
+                </tr>
+
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
