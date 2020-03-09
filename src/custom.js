@@ -37,7 +37,6 @@ module.exports = function () {
             context.columns = [];
             for (let column in results[0]) {
                 context.columns.push(column)
-                console.log(`Column: ${column}`);
             };
             complete();
         });
@@ -60,6 +59,7 @@ module.exports = function () {
     router.get('/customQuery', function (req, res) {
         var callbackCount = 0;
         var context = {};
+        context.firstQuery = req.query.query || "";
         var mysql = req.app.get('mysql');
         customQuery(req, res, mysql, context, req.query.query, complete);
 
