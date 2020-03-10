@@ -1,27 +1,12 @@
 <div class="container">
 
     <form action="/custom" method="get">
+        {{#each exampleQueries}}
         <div class="form-group col-md-3">
             <button name="query" type="submit" class="btn btn-primary btn-block"
-                value="SELECT * FROM StormEvents2019 LIMIT 10;">10 Storm Events, 2019</button>
+                value="{{this.query}}">{{this.name}}</button>
         </div>
-        <div class="form-group col-md-3">
-            <button name="query" type="submit" class="btn btn-primary btn-block"
-                value="SELECT * FROM StormEvents2019 LIMIT 20 OFFSET 10;">20 Storm Events, 2019</button>
-        </div>
-        <div class="form-group col-md-3">
-            <button name="query" type="submit" class="btn btn-primary btn-block"
-                value="SELECT * FROM AbrahamLincolnNationalPark LIMIT 300 OFFSET 1000;">300 Records, Abe Lincoln Nat
-                Park</button>
-        </div>
-        <div class="form-group col-md-3">
-            <button name="query" type="submit" class="btn btn-primary btn-block"
-                value="SELECT * FROM TrafficEvents LIMIT 300;">300 Records, Traffic Events</button>
-        </div>
-        <div class="form-group col-md-3">
-            <button name="query" type="submit" class="btn btn-primary btn-block"
-                value="SELECT * FROM `StateEnergyUse;">All Records, State Energy Use</button>
-        </div>
+        {{/each}}
     </form>
 
     <form action="/custom" method="get">
