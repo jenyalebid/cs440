@@ -25,37 +25,21 @@
 			<thead>
 				<tr>
 					<th>Index</th>
-					<th>State</th>
-					<th>County</th>
-					<th>Year</th>
-					<th>Good Days</th>
-					<th>Moderate Days</th>
-					<th>Unhealthy Days</th>
-					<th>Hazardous Days</th>
-					<th>Max AQI</th>
-					<th>Median AQI</th>
-					<th>Days Ozone</th>
-					<th>Days SO2</th>
+					<th>Park Name</th>
 				</tr>
 			</thead>
 			<tbody>
 				<!--using handlebars to display each row from database-->
 				{{#each weather}}
-		
-				<tr>
+					
 					<td>{{@index}}</td>
-					<td>{{State}}</td>
-					<td>{{County}}</td>
-					<td>{{Year}}</td>
-					<td>{{Good_Days}}</td>
-					<td>{{Moderate_Days}}</td>
-					<td>{{Unhealthy_Days}}</td>
-					<td>{{Hazardous_Days}}</td>
-					<td>{{Max_AQI}}</td>
-					<td>{{Median_AQI}}</td>
-					<td>{{Days_Ozone}}</td>
-					<td>{{Days_SO2}}</td>
-				</tr>
+                    {{#each this}}
+                    <td>
+                        {{this}}
+                    </td>
+                    {{/each}}
+                </tr>
+
 				
 				{{/each}}
 			</tbody>

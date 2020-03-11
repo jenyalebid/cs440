@@ -9,7 +9,7 @@ module.exports = function () {
     //Get the weather table
     function getweather(mysql) {
         return function (callback) {
-            mysql.pool.query("SELECT State, County, Year, Good_Days, Moderate_Days, Unhealthy_Days, Hazardous_Days, Max_AQI, Median_AQI, Days_CO, Days_Ozone, Days_SO2 FROM AirQualityAndParticles", function (err, tb1) {
+            mysql.pool.query("SHOW TABLES", function (err, tb1) {
                 if (err) {
                     return callback(err, []);
                 }
