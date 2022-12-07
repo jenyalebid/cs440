@@ -19,9 +19,9 @@
     "homepage": "",
     "dependencies": {
         "async": "^3.1.0",
-        "body-parser": "^1.19.0",
+        "body-parser": "^1.20.1",
         "bootstrap-list-filter": "^0.3.3",
-        "express": "^4.17.1",
+        "express": "^4.18.2",
         "express-handlebars": "^3.1.0",
         "morgan": "^1.9.1",
         "mysql": "^2.17.1",
